@@ -7,7 +7,9 @@
     (lib.mkIf config.hardware.asahi.useExperimentalGPUDriver {
 
       # install the drivers
-      hardware.opengl.package = config.hardware.asahi.pkgs.mesa-asahi-edge.drivers;
+      hardware.opengl.package = (pkgs.mesa-asahi-edge.override {
+        fakeVersion = true;
+      }).drivers;
 
       # required for GPU kernel driver
       hardware.asahi.addEdgeKernelConfig = true;
